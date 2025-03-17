@@ -25,17 +25,17 @@ export default function Page() {
         <Text>I'm a curious creative with a background in front-end development and illustration driven to learn how different people think (and think about how to make things work better for them)</Text>
         <Text><Highlight
           query={["remote", "SF Bay Area."]}
-          styles={{ px: "0.5", bg: "teal.subtle", color: "teal.fg" }}
+          styles={{ px: "1", bg: "purple.subtle", color: "purple.fg", fontFamily: "heading", fontWeight: "semibold" }}
         >
           Currently searching for remote or hybrid work in the SF Bay Area.
         </Highlight></Text>
 
         <HStack>
-        <IconButton
+          <IconButton
             aria-label="GitHub"
             variant="surface"
             size="xl"
-            colorPalette="green"
+            colorPalette="cyan"
             asChild
           >
             <a href="https://github.com/chengjins"><GithubLogo /></a>
@@ -44,14 +44,14 @@ export default function Page() {
             aria-label="LinkedIn"
             variant="surface"
             size="xl"
-            colorPalette="teal"
+            colorPalette="blue"
             asChild
           >
             <a href="https://www.linkedin.com/in/juliancsy/"><LinkedinLogo /></a>
           </IconButton>
           <Button
             fontFamily="heading"
-            colorPalette="cyan"
+            colorPalette="purple"
             variant="surface"
             size="xl"
             asChild

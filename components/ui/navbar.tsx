@@ -9,6 +9,7 @@ import {
   Stack,
   Collapsible,
   Icon,
+  Link,
   Popover,
   Portal,
   useBreakpointValue,
@@ -52,9 +53,8 @@ export default function WithSubnavigation() {
         <Flex flex={{ base: 1 }} justify={{ base: 'center', md: 'start' }}>
           <Heading
             textAlign={useBreakpointValue({ base: 'center', md: 'left' })}
-            // fontFamily={'heading'}
             color={useColorModeValue('gray.800', 'white')}>
-            chengj.in
+            <Link href="/" colorPalette='purple'>chengj.in</Link>
           </Heading>
 
           <Flex display={{ base: 'none', md: 'flex' }} ml={10}>
@@ -66,24 +66,9 @@ export default function WithSubnavigation() {
           flex={{ base: 1, md: 0 }}
           justify={'flex-end'}
           direction={'row'}
-          spacing={6}>
-        <ColorModeButton />
-          {/* <Button as={'a'} fontSize={'sm'} fontWeight={400} variant={'link'} href={'#'}>
-            Sign In
-          </Button>
-          <Button
-            as={'a'}
-            display={{ base: 'none', md: 'inline-flex' }}
-            fontSize={'sm'}
-            fontWeight={600}
-            color={'white'}
-            bg={'pink.400'}
-            href={'#'}
-            _hover={{
-              bg: 'pink.300',
-            }}>
-            Sign Up
-          </Button> */}
+          spaceX={6}
+        >
+          <ColorModeButton />
         </Stack>
       </Flex>
 
@@ -100,7 +85,7 @@ const DesktopNav = () => {
     const popoverContentBgColor = useColorModeValue('white', 'gray.800')
 
   return (
-    <Stack direction={'row'} spacing={4}>
+    <Stack direction={'row'} spaceX={4}>
       {NAV_ITEMS.map((navItem) => (
         <Box key={navItem.label}>
             <Popover.Root positioning={{ placement: "bottom-start" }}>
@@ -110,7 +95,9 @@ const DesktopNav = () => {
                         p={2}
                         href={navItem.href ?? '#'}
                         fontSize={'sm'}
-                        fontWeight={500}
+                        fontWeight={'medium'}
+                        textTransform={'lowercase'}
+                        letterSpacing={'wide'}
                         color={linkColor}
                         _hover={{
                         textDecoration: 'none',
@@ -119,6 +106,7 @@ const DesktopNav = () => {
                         {navItem.label}
                     </Box>
                 </Popover.Trigger>
+                {navItem.children && (
                 <Portal>
                     <Popover.Positioner>
                         <Popover.Content
@@ -129,56 +117,19 @@ const DesktopNav = () => {
                             rounded={'xl'}
                             minW={'sm'}
                         >
-                        {/* <Popover.CloseTrigger /> */}
-                            <Popover.Arrow />
-                            <Popover.Body>
-                                {/* <Popover.Title /> */}
-                                <Stack>
-                                {navItem.children?.map((child) => (
-                                    <DesktopSubNav key={child.label} {...child} />
-                                ))}
-                                </Stack>
-                            </Popover.Body>
+                          <Popover.Arrow />
+                          <Popover.Body>
+                              <Stack>
+                              {navItem.children?.map((child) => (
+                                  <DesktopSubNav key={child.label} {...child} />
+                              ))}
+                              </Stack>
+                          </Popover.Body>
                         </Popover.Content>
                     </Popover.Positioner>
                 </Portal>
-            </Popover.Root>  
-
-
-          {/* <Popover trigger={'hover'} placement={'bottom-start'}>
-            <PopoverTrigger>
-              <Box
-                as="a"
-                p={2}
-                href={navItem.href ?? '#'}
-                fontSize={'sm'}
-                fontWeight={500}
-                color={linkColor}
-                _hover={{
-                  textDecoration: 'none',
-                  color: linkHoverColor,
-                }}>
-                {navItem.label}
-              </Box>
-            </PopoverTrigger>
-
-            {navItem.children && (
-              <PopoverContent
-                border={0}
-                boxShadow={'xl'}
-                bg={popoverContentBgColor}
-                p={4}
-                rounded={'xl'}
-                minW={'sm'}>
-                <Stack>
-                  {navItem.children.map((child) => (
-                    <DesktopSubNav key={child.label} {...child} />
-                  ))}
-                </Stack>
-              </PopoverContent>
-            )}
-          </Popover> */}
-
+                )}
+            </Popover.Root>
 
         </Box>
       ))}
@@ -191,30 +142,31 @@ const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
     <Box
       as="a"
       href={href}
-      role={'group'}
+      className='group'
       display={'block'}
       p={2}
       rounded={'md'}
-      _hover={{ bg: useColorModeValue('pink.50', 'gray.900') }}>
+      _hover={{ bg: 'purple.subtle' }}> {/* useColorModeValue('pink.50', 'gray.900') */}
       <Stack direction={'row'} align={'center'}>
         <Box>
-          <Text
+          <Heading
+            size="md"
             transition={'all .3s ease'}
-            _groupHover={{ color: 'pink.400' }}
-            fontWeight={500}>
+            _groupHover={{ color: 'purple.solid' }}
+            >
             {label}
-          </Text>
+          </Heading>
           <Text fontSize={'sm'}>{subLabel}</Text>
         </Box>
         <Flex
           transition={'all .3s ease'}
-          transform={'translateX(-10px)'}
+          transform={'translateX(-30px)'}
           opacity={0}
           _groupHover={{ opacity: '100%', transform: 'translateX(0)' }}
           justify={'flex-end'}
           align={'center'}
           flex={1}>
-          <Icon color={'pink.400'} w={5} h={5}><CaretRight /></Icon>
+          <Icon color={'purple.solid'} w={5} h={5} as={CaretRight} />
         </Flex>
       </Stack>
     </Box>
@@ -291,41 +243,32 @@ interface NavItem {
 
 const NAV_ITEMS: Array<NavItem> = [
   {
-    label: 'Inspiration',
+    label: 'Case Studies',
     children: [
       {
-        label: 'Explore Design Work',
-        subLabel: 'Trending Design to inspire you',
-        href: '#',
+        label: 'Unemployment Redesigned',
+        subLabel: 'Simplying the UX for California\'s online unemployment claim filing process',
+        href: '/unemployment',
       },
       {
-        label: 'New & Noteworthy',
-        subLabel: 'Up-and-coming Designers',
-        href: '#',
+        label: 'Timetabus',
+        subLabel: 'Reiterating the design of a mobile transit tracking app from research to branding',
+        href: '/timetabus',
       },
     ],
   },
   {
-    label: 'Find Work',
+    label: 'Coding',
     children: [
       {
-        label: 'Job Board',
-        subLabel: 'Find your dream design job',
-        href: '#',
-      },
-      {
-        label: 'Freelance Projects',
-        subLabel: 'An exclusive list for contract work',
-        href: '#',
+        label: 're_spring',
+        subLabel: 'A vanilla JavaScript web app for archiving Q&A sites from a JSON data backup',
+        href: '/re_spring',
       },
     ],
   },
   {
-    label: 'Learn Design',
-    href: '#',
-  },
-  {
-    label: 'Hire Designers',
-    href: '#',
+    label: 'CV',
+    href: '/cv',
   },
 ]

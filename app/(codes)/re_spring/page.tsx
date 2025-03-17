@@ -1,5 +1,5 @@
 import { Text } from "@chakra-ui/react"
 
 export default function Page () {
-    return <Text>Re_Spring</Text>
+    return <Text>re_spring</Text>
 }
