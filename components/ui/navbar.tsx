@@ -24,7 +24,7 @@ import {
 } from '@phosphor-icons/react';
 
 
-export default function WithSubnavigation() {
+export default function NavBar() {
   const { isOpen, onToggle } = useDisclosure()
 
   return (
