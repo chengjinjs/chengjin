@@ -38,7 +38,7 @@ export default function Page() {
             colorPalette="cyan"
             asChild
           >
-            <a href="https://github.com/chengjins"><GithubLogo /></a>
+            <a href="https://github.com/chengjinjs"><GithubLogo /></a>
           </IconButton>
           <IconButton
             aria-label="LinkedIn"

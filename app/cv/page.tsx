@@ -19,18 +19,22 @@ import {
     MapPin,
     ArrowRight,
     Asterisk,
-    ArrowSquareOut
+    ArrowSquareOut,
+    Envelope,
+    GithubLogo,
+    LinkedinLogo
 } from "@phosphor-icons/react"
-import { SiPython, SiRenpy } from "react-icons/si";
+import { SiPython } from "react-icons/si";
 
 export default function Page () {
     return (
         <Stack gap="12" separator={<StackSeparator />}>
-            <Box>
-                <Heading size="4xl" mb="6">Profile</Heading>
+            <Stack gap="6">
+                <Heading size="4xl">Profile</Heading>
+                <Text color="fg.warning">This profile is a work in progress.</Text>
                 <List.Root gap="1" variant="plain" align="center">
                     <List.Item>
-                        <List.Indicator asChild color="blue.solid">
+                        <List.Indicator asChild color="purple.solid">
                             <HandWaving />
                         </List.Indicator>
                         <Highlight
@@ -41,7 +45,7 @@ export default function Page () {
                         </Highlight>
                     </List.Item>
                     <List.Item>
-                        <List.Indicator asChild color="blue.solid">
+                        <List.Indicator asChild color="purple.solid">
                             <MapPin />
                         </List.Indicator>
                         <Tooltip 
@@ -50,7 +54,7 @@ export default function Page () {
                             openDelay={100}
                             closeDelay={100}
                             positioning={{ placement: "top" }}
-                            contentProps={{ css: { "--tooltip-bg": "blue" }}}
+                            contentProps={{ css: { "--tooltip-bg": "purple" }}}
                         >
                             <Mark variant="plain" textDecoration="underline" textDecorationColor="gray.emphasized" textUnderlineOffset="4px">PDX</Mark>
                         </Tooltip>
@@ -61,15 +65,43 @@ export default function Page () {
                             openDelay={100}
                             closeDelay={100}
                             positioning={{ placement: "top" }}
-                            contentProps={{ css: { "--tooltip-bg": "blue" }}}
+                            contentProps={{ css: { "--tooltip-bg": "purple" }}}
                         >
                             <Mark variant="plain" textDecoration="underline" textDecorationColor="gray.emphasized" textUnderlineOffset="4px">SJC</Mark>
                         </Tooltip>
                     </List.Item>
                 </List.Root>
-            </Box>
+                <Stack gap="3">
+                    <Heading size="2xl">Contact</Heading>
+                    <List.Root gap="1" variant="plain" align="center" textStyle="md">
+                        <List.Item>
+                            <List.Indicator asChild color="purple.solid">
+                                <Envelope />
+                            </List.Indicator>
+                            <Link href="mailto:js@chengj.in">js@chengj.in</Link>
+                        </List.Item>
+                        <List.Item>
+                            <List.Indicator asChild color="purple.solid">
+                                <LinkedinLogo />
+                            </List.Indicator>
+                            <Link href="https://www.linkedin.com/in/juliancsy/">juliancsy</Link>
+                        </List.Item>
+                        <List.Item>
+                            <List.Indicator asChild color="purple.solid">
+                                <GithubLogo />
+                            </List.Indicator>
+                            <Link href="https://github.com/chengjinjs">chengjinjs</Link>
+                        </List.Item>
+                    </List.Root>
+                </Stack>                
+            </Stack>
             <Box>
                 <Heading size="4xl" mb="6">Skills</Heading>
+                <List.Root align="center" textStyle="sm">
+                    <List.Item>UX + UI design, visual design, wireframing, prototyping, user research, usability testing, character illustration & design, style guides</List.Item>
+                    <List.Item>JavaScript, React, Next.js, HTML5, CSS3, SASS/SCSS, PHP, MySQL, Ren'Py/Python</List.Item>
+                    <List.Item>Figma, Adobe Creative Suite (Photoshop, InDesign, Illustrator), Asana, Notion, Clip Studio Paint, Affinity Designer, Google Analytics</List.Item>
+                </List.Root>
             </Box>
             <Box>
                 <Heading size="4xl" mb="6">Experience</Heading>
@@ -108,7 +140,7 @@ export default function Page () {
                 
                     <Stack gap="3" maxW="2xl">
                         <Stack spaceY="-0.75rem">
-                            <Heading size="2xl">Indie Game Dev</Heading>
+                            <Heading size="2xl">Game Development</Heading>
                             <HStack gap="0.5" textStyle="xs" color="fg.subtle">
                                 <Asterisk />
                                 <Text>credited as αrcsine</Text>
