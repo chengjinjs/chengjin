@@ -3,7 +3,6 @@
 import {
     Flex,
     Icon,
-    Text,
     HStack
 } from "@chakra-ui/react";
 import { Copyright } from "@phosphor-icons/react";
