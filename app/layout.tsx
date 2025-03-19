@@ -3,7 +3,8 @@ import localFont from "next/font/local"
 import { Provider } from "@/components/ui/provider"
 import NavBar from "@/components/ui/navbar"
 import Head from "./head"
-import { Container } from "@chakra-ui/react"
+import { Container, Flex } from "@chakra-ui/react"
+import Footer from "@/components/ui/footer"
 
 const manrope = localFont({
   variable: '--font-manrope',
@@ -30,10 +31,14 @@ export default function RootLayout({
       <Head />
       <body>
         <Provider>
-          <NavBar />
-          <Container maxW="5xl" my="12">
-            {children}
-          </Container>
+          
+          <Flex direction="column" justify="space-between" minH="vh">
+            <NavBar />
+            <Container maxW="5xl" my="12" flexGrow="1" marginEnd="auto">
+              {children}
+            </Container>
+            <Footer />
+          </Flex>
         </Provider>
       </body>
     </html>
