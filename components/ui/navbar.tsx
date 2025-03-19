@@ -10,22 +10,24 @@ import {
   Collapsible,
   Icon,
   Link,
+  LinkBox,
+  LinkOverlay,
   Popover,
   Portal,
   useBreakpointValue,
-  useDisclosure,
+  // useDisclosure,
 } from '@chakra-ui/react';
 import { useColorModeValue, ColorModeButton } from "@/components/ui/color-mode";
 import {
-    Hamburger,
-    X,
+    // Hamburger,
+    // X,
     CaretDown,
     CaretRight
 } from '@phosphor-icons/react';
 
 
 export default function NavBar() {
-  const { isOpen, onToggle } = useDisclosure()
+  // const { isOpen, onToggle } = useDisclosure()
 
   return (
     <Box>
@@ -44,8 +46,8 @@ export default function NavBar() {
           ml={{ base: -2 }}
           display={{ base: 'flex', md: 'none' }}>
           <IconButton
-            onClick={onToggle}
-            icon={isOpen ? <X w={3} h={3} /> : <Hamburger w={5} h={5} />}
+            // onClick={onToggle}
+            // icon={isOpen ? <X w={3} h={3} /> : <Hamburger w={5} h={5} />}
             variant={'ghost'}
             aria-label={'Toggle Navigation'}
           />
@@ -72,7 +74,7 @@ export default function NavBar() {
         </Stack>
       </Flex>
 
-      <Collapsible.Root in={isOpen}> {/* animateOpacity? */}
+      <Collapsible.Root> {/* in={isOpen} animateOpacity? */}
         <MobileNav />
       </Collapsible.Root>
     </Box>
@@ -90,21 +92,23 @@ const DesktopNav = () => {
         <Box key={navItem.label}>
             <Popover.Root positioning={{ placement: "bottom-start" }}>
                 <Popover.Trigger asChild>
-                    <Box
-                        as="a"
+                    <LinkBox
+                        as="button"
                         p={2}
-                        href={navItem.href ?? '#'}
                         fontSize={'sm'}
                         fontWeight={'medium'}
                         textTransform={'lowercase'}
                         letterSpacing={'wide'}
                         color={linkColor}
                         _hover={{
-                        textDecoration: 'none',
-                        color: linkHoverColor,
-                        }}>
-                        {navItem.label}
-                    </Box>
+                          textDecoration: 'none',
+                          color: linkHoverColor,
+                        }}
+                      >
+                        <LinkOverlay asChild href={navItem.href ?? '#'}>
+                          <Link>{navItem.label}</Link>
+                        </LinkOverlay>
+                    </LinkBox>
                 </Popover.Trigger>
                 {navItem.children && (
                 <Portal>
@@ -139,23 +143,27 @@ const DesktopNav = () => {
 
 const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
   return (
-    <Box
-      as="a"
-      href={href}
+    <LinkBox
+      // as="a"
       className='group'
       display={'block'}
       p={2}
       rounded={'md'}
-      _hover={{ bg: 'purple.subtle' }}> {/* useColorModeValue('pink.50', 'gray.900') */}
+      _hover={{ bg: 'purple.subtle' }}
+    > {/* useColorModeValue('pink.50', 'gray.900') */}
       <Stack direction={'row'} align={'center'}>
         <Box>
-          <Heading
-            size="md"
-            transition={'all .3s ease'}
-            _groupHover={{ color: 'purple.solid' }}
-            >
-            {label}
-          </Heading>
+          <LinkOverlay asChild>
+            <Link href={href}>
+              <Heading
+                size="md"
+                transition={'all .3s ease'}
+                _groupHover={{ color: 'purple.solid' }}
+                >
+                {label}
+              </Heading>
+            </Link>
+          </LinkOverlay>
           <Text fontSize={'sm'}>{subLabel}</Text>
         </Box>
         <Flex
@@ -169,7 +177,7 @@ const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
           <Icon color={'purple.solid'} w={5} h={5} as={CaretRight} />
         </Flex>
       </Stack>
-    </Box>
+    </LinkBox>
   )
 }
 
@@ -184,35 +192,36 @@ const MobileNav = () => {
 }
 
 const MobileNavItem = ({ label, children, href }: NavItem) => {
-  const { isOpen, onToggle } = useDisclosure()
+  // const { isOpen, onToggle } = useDisclosure()
 
   return (
-    <Stack spacing={4} onClick={children && onToggle}>
-      <Box
+    <Stack spaceY={4}> {/* onClick={children && onToggle} */}
+      <LinkBox
         py={2}
-        as="a"
-        href={href ?? '#'}
+        // as="a"
         justifyContent="space-between"
         alignItems="center"
         _hover={{
           textDecoration: 'none',
         }}>
-        <Text fontWeight={600} color={useColorModeValue('gray.600', 'gray.200')}>
-          {label}
-        </Text>
+          <LinkOverlay asChild>
+            <Link href={href ?? '#'} fontWeight={600} color={useColorModeValue('gray.600', 'gray.200')}>
+              {label}
+            </Link>
+          </LinkOverlay>
         {children && (
           <Icon
             transition={'all .25s ease-in-out'}
-            transform={isOpen ? 'rotate(180deg)' : ''}
+            // transform={isOpen ? 'rotate(180deg)' : ''}
             w={6}
             h={6}
           >
             <CaretDown />
         </Icon>
         )}
-      </Box>
+      </LinkBox>
 
-      <Collapsible.Root in={isOpen} style={{ marginTop: '0!important' }}> // animateOpacity?
+      <Collapsible.Root style={{ marginTop: '0!important' }}> {/* in={isOpen} animateOpacity? */}
         <Collapsible.Content>
         <Stack
           mt={2}
@@ -223,9 +232,11 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
           align={'start'}>
           {children &&
             children.map((child) => (
-              <Box as="a" key={child.label} py={2} href={child.href}>
-                {child.label}
-              </Box>
+              <LinkBox key={child.label} py={2}>
+                <LinkOverlay asChild>
+                  <Link href={child.href}>{child.label}</Link>
+                </LinkOverlay>
+              </LinkBox>
             ))}
         </Stack>
         </Collapsible.Content>
