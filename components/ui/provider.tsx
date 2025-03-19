@@ -11,7 +11,7 @@ const system = createSystem(defaultConfig, {
     tokens: {
       fonts: {
         heading: { value: "var(--font-bricolage)" },
-        body: { value: "var(--font-karla)" },
+        body: { value: "var(--font-manrope)" },
       },
     },
   },

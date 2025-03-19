@@ -1,77 +1,66 @@
+'use client';
+
 import {
   Box,
-  Button,
-  Checkbox,
-  ClientOnly,
+  Stack,
   HStack,
   Heading,
-  Progress,
-  RadioGroup,
-  Skeleton,
-  VStack,
+  Text,
+  Highlight,
+  Button,
+  Icon,
+  IconButton
 } from "@chakra-ui/react"
-import Image from "next/image"
-import { ColorModeToggle } from "../components/color-mode-toggle"
+import { HandPeace, PaperPlaneRight, GithubLogo, LinkedinLogo } from "@phosphor-icons/react"
 
-export default async function Page() {
+export default function Page() {
   return (
-    <Box textAlign="center" fontSize="xl" pt="30vh">
-      <VStack gap="8">
-        <Image
-          alt="chakra logo"
-          src="/static/logo.svg"
-          width="80"
-          height="80"
-        />
-        <Heading size="2xl" letterSpacing="tight">
-          Welcome to Chakra UI v3 + Next.js (App)
+    <Box fontSize="lg" pt="30vh" m="auto" maxW="2xl">
+      <Stack
+        spaceY="6"
+      >
+        <Heading size='5xl'>
+          Hi, I'm Julian Sy <Icon as={HandPeace} /><br />
         </Heading>
-
-        <HStack gap="10">
-          <Checkbox.Root defaultChecked>
-            <Checkbox.HiddenInput />
-            <Checkbox.Control>
-              <Checkbox.Indicator />
-            </Checkbox.Control>
-            <Checkbox.Label>Checkbox</Checkbox.Label>
-          </Checkbox.Root>
-
-          <RadioGroup.Root display="inline-flex" defaultValue="1">
-            <RadioGroup.Item value="1" mr="2">
-              <RadioGroup.ItemHiddenInput />
-              <RadioGroup.ItemControl>
-                <RadioGroup.ItemIndicator />
-              </RadioGroup.ItemControl>
-              <RadioGroup.ItemText lineHeight="1">Radio</RadioGroup.ItemText>
-            </RadioGroup.Item>
-
-            <RadioGroup.Item value="2">
-              <RadioGroup.ItemHiddenInput />
-              <RadioGroup.ItemControl>
-                <RadioGroup.ItemIndicator />
-              </RadioGroup.ItemControl>
-              <RadioGroup.ItemText lineHeight="1">Radio</RadioGroup.ItemText>
-            </RadioGroup.Item>
-          </RadioGroup.Root>
-        </HStack>
-
-        <Progress.Root width="300px" value={65} striped>
-          <Progress.Track>
-            <Progress.Range />
-          </Progress.Track>
-        </Progress.Root>
+        <Text>I'm a curious creative with a background in front-end development and illustration driven to learn how different people think (and think about how to make things work better for them)</Text>
+        <Text><Highlight
+          query={["remote", "SF Bay Area."]}
+          styles={{ px: "1", bg: "purple.subtle", color: "purple.fg", fontFamily: "heading", fontWeight: "semibold" }}
+        >
+          Currently searching for remote or hybrid work in the SF Bay Area.
+        </Highlight></Text>
 
         <HStack>
-          <Button>Let's go!</Button>
-          <Button variant="outline">bun install @chakra-ui/react</Button>
+          <IconButton
+            aria-label="GitHub"
+            variant="surface"
+            size="xl"
+            colorPalette="cyan"
+            asChild
+          >
+            <a href="https://github.com/chengjinjs"><GithubLogo /></a>
+          </IconButton>
+          <IconButton
+            aria-label="LinkedIn"
+            variant="surface"
+            size="xl"
+            colorPalette="blue"
+            asChild
+          >
+            <a href="https://www.linkedin.com/in/juliancsy/"><LinkedinLogo /></a>
+          </IconButton>
+          <Button
+            fontFamily="heading"
+            colorPalette="purple"
+            variant="surface"
+            size="xl"
+            asChild
+          >
+            <a href="mailto:js@chengj.in">email me <Icon as={PaperPlaneRight} /></a>
+          </Button>
         </HStack>
-      </VStack>
-
-      <Box pos="absolute" top="4" right="4">
-        <ClientOnly fallback={<Skeleton w="10" h="10" rounded="md" />}>
-          <ColorModeToggle />
-        </ClientOnly>
-      </Box>
+        
+      </Stack>
     </Box>
   )
 }
